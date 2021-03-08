@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_date_picker/src/widget/month_picker_widget.dart';
 
 import 'date_picker_theme.dart';
 import 'date_picker_constants.dart';
@@ -10,6 +11,8 @@ import 'widget/datetime_picker_widget.dart';
 import 'widget/time_picker_widget.dart';
 
 enum DateTimePickerMode {
+  /// Display DatePicker without day
+  month,
   /// Display DatePicker
   date,
 
@@ -195,6 +198,21 @@ class _DatePickerComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget pickerWidget;
     switch (route.pickerMode) {
+      case DateTimePickerMode.month:
+        pickerWidget = MonthPickerWidget(
+          onMonthChangeStartWithFirstDate:
+              route.onMonthChangeStartWithFirstDate,
+          minDateTime: route.minDateTime,
+          maxDateTime: route.maxDateTime,
+          initialDateTime: route.initialDateTime,
+          dateFormat: route.dateFormat,
+          locale: route.locale,
+          pickerTheme: route.pickerTheme,
+          onCancel: route.onCancel,
+          onChange: route.onChange,
+          onConfirm: route.onConfirm,
+        );
+        break;
       case DateTimePickerMode.date:
         pickerWidget = DatePickerWidget(
           onMonthChangeStartWithFirstDate:
